@@ -1,0 +1,212 @@
+# =============================================================================
+# FYP Pipeline — .gitignore
+# Mid-Range GPU-Accelerated Framework for Multi-Scale Biological Network Analysis
+# =============================================================================
+
+# -----------------------------------------------------------------------------
+# Pipeline outputs — never commit large data files to git
+# -----------------------------------------------------------------------------
+
+# Step 1 outputs (preprocessing artifacts)
+output/
+output_test/
+output_*/
+
+# Specific large files that may appear in root
+lib_sizes.npy
+samples.npy
+genes_filtered.npy
+expr_mmap.npy
+z_mmap.npy
+edge_list.csv
+adj_csr.npz
+adj_csr_gpu.npz
+graph_stats.txt
+gpu_stats.txt
+
+# Step result directories
+cpu_results/
+parallel_results/
+gpu_results/
+
+# Log files
+*.log
+preprocess.log
+gpu_preprocess.log
+cpu_baselines.log
+parallel_cpu.log
+gpu_algorithms.log
+
+# -----------------------------------------------------------------------------
+# Dataset — the GTEx parquet file (2+ GB) must NEVER be committed
+# -----------------------------------------------------------------------------
+*.parquet
+*.h5
+*.hdf5
+*.h5ad
+*.zarr
+
+# -----------------------------------------------------------------------------
+# Python
+# -----------------------------------------------------------------------------
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+*.pyd
+
+# Virtual environments
+.venv/
+venv/
+env/
+ENV/
+.env
+
+# Distribution / packaging
+dist/
+build/
+*.egg-info/
+*.egg
+.eggs/
+
+# Testing
+.pytest_cache/
+.coverage
+htmlcov/
+*.cover
+
+# MyPy / type checking
+.mypy_cache/
+.dmypy.json
+
+# Jupyter notebooks (outputs can be huge)
+.ipynb_checkpoints/
+*.ipynb
+
+# -----------------------------------------------------------------------------
+# NumPy / data files
+# -----------------------------------------------------------------------------
+
+# Large numpy arrays (outputs, not source)
+# Keep: nothing — all .npy files are pipeline outputs
+*.npy
+*.npz
+
+# Exceptions — if you add any small reference .npy files to the repo,
+# unignore them explicitly:
+# !data/reference_genes.npy
+
+# CSV outputs (large result files)
+# Source CSVs (small, for reference) can be committed if needed
+# Unignore specific ones with: !data/some_reference.csv
+bfs_distances.csv
+pagerank_scores.csv
+rwr_scores.csv
+hits_hub_scores.csv
+hits_authority_scores.csv
+mce_scores.csv
+louvain_communities.csv
+mcl_clusters.csv
+cpu_timing.csv
+par_bfs_distances.csv
+par_pagerank_scores.csv
+par_rwr_scores.csv
+par_hits_hub_scores.csv
+par_hits_authority_scores.csv
+par_mce_scores.csv
+par_louvain_communities.csv
+par_mcl_clusters.csv
+parallel_timing.csv
+benchmark_comparison.csv
+benchmark_report.txt
+gpu_bfs_distances.csv
+gpu_pagerank_scores.csv
+gpu_mce_scores.csv
+gpu_rwr_scores.csv
+gpu_hits_hub_scores.csv
+gpu_hits_authority_scores.csv
+gpu_louvain_communities.csv
+gpu_mcl_clusters.csv
+gpu_motif_scores.csv
+gpu_gnn_embeddings.csv
+gpu_gnn_embeddings.npy
+gpu_timing.csv
+three_way_comparison.csv
+three_way_report.txt
+
+# -----------------------------------------------------------------------------
+# OS files
+# -----------------------------------------------------------------------------
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+*.lnk
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+.Spotlight-V100
+.Trashes
+
+# Linux
+*~
+.nfs*
+
+# -----------------------------------------------------------------------------
+# IDEs and editors
+# -----------------------------------------------------------------------------
+
+# VSCode
+.vscode/
+*.code-workspace
+
+# PyCharm / IntelliJ
+.idea/
+*.iml
+
+# Spyder
+.spyderproject.cfg
+.spyproject/
+
+# Vim / Emacs
+*.swp
+*.swo
+*~
+\#*\#
+.\#*
+
+# -----------------------------------------------------------------------------
+# CUDA / GPU build artifacts
+# -----------------------------------------------------------------------------
+*.ptx
+*.cubin
+*.fatbin
+*.o
+*.a
+*.lib
+*.dll
+*.pdb
+
+# -----------------------------------------------------------------------------
+# What IS committed (for reference)
+# -----------------------------------------------------------------------------
+# step0_verify_env.py     — environment checker
+# step1_preprocess_gtex.py — 3-pass streaming preprocessor
+# step2_gpu_preprocess.py  — GPU correlation
+# step3_cpu_baselines.py   — single-thread baselines
+# step4_parallel_cpu.py    — parallel CPU implementations
+# step5_gpu_algorithms.py  — GPU implementations (milestones 2.1/2.2/2.3)
+# README.md                — complete run guide
+# .gitignore               — this file
+#
+# NOT committed:
+# - The GTEx parquet file (2+ GB)
+# - Any .npy / .npz output files
+# - The output\ directory and all its contents
+# - Log files
+# - Python virtual environment
